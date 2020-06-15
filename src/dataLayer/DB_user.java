@@ -4,8 +4,9 @@ import java.sql.*;
 
 public class DB_user {
 
-    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost/db_ADAM";
+    static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
+    static final String DB_URL = "jdbc:mysql://localhost/db_ADAM?useUnicode=true&useJDBCCompliantTimezoneShift=\t" +
+            "rue&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
     static final String USER = "u";
     static final String PASS = "1";
@@ -18,14 +19,14 @@ public class DB_user {
         String sql = "";
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName(JDBC_DRIVER);
             System.out.println("Connecting to datdbase...");
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             System.out.println("Creating a statement...");
             stmt = conn.createStatement();
 
-            sql = "SELECT * FROM users WHERE user_name = \"" +
-                    sUserName + "\" AND user_password = \"" + sUserPassword + "\"";
+            sql = "SELECT * FROM users WHERE name = \"" +
+                    sUserName + "\" AND password = \"" + sUserPassword + "\"";
             System.out.println(sql);
             ResultSet rs = stmt.executeQuery(sql);
 
