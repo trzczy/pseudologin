@@ -4,11 +4,10 @@ import java.sql.*;
 
 public class DB_user {
 
-    static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost/db_ADAM?useUnicode=true&useJDBCCompliantTimezoneShift=\t" +
-            "rue&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    static final String JDBC_DRIVER = "org.postgresql.Driver";
+    static final String DB_URL = "jdbc:postgresql://localhost:5432/postgres";
 
-    static final String USER = "u";
+    static final String USER = "postgres";
     static final String PASS = "1";
 
     public boolean isValidUserLogin(String sUserName, String sUserPassword) {
@@ -25,8 +24,8 @@ public class DB_user {
             System.out.println("Creating a statement...");
             stmt = conn.createStatement();
 
-            sql = "SELECT * FROM users WHERE name = \"" +
-                    sUserName + "\" AND password = \"" + sUserPassword + "\"";
+            sql = "SELECT * FROM users WHERE name = '" +
+                    sUserName + "' AND password = '" + sUserPassword + "'";
             System.out.println(sql);
             ResultSet rs = stmt.executeQuery(sql);
 
